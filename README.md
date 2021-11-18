@@ -13,7 +13,11 @@
 - Compile the code
   
 ### No experience on arduino? 
-Please follow the guide into the folder called docs
+Please follow this video
+
+https://www.youtube.com/watch?v=ppXkl0046dc
+
+or the guide into the folder called docs
 
 Enjoy your ticker
 ![alt text](https://github.com/ottacom/m5stickc-coingecko-ticker/blob/main/docs/ticker.jpg)
