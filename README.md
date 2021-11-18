@@ -12,7 +12,7 @@
 
 ### What you need?
 - An M5stick arduino device
-    https://shop.m5stack.com/products/stick-c?variant=17203451265114
+    https://shop.m5stack.com/products/stick-c
 - Arduino software
     https://www.arduino.cc/en/Main/Software
 - The code into this repo
