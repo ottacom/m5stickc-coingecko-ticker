@@ -1,1 +1,1 @@
-# m5stickc-coingecko-tiker
+# m5stickc-coingecko-ticker
