@@ -1,7 +1,14 @@
 # m5stickc-coingecko-ticker
 
 
+
 ### This is a very basic project using FREE coingecko api (https://www.coingecko.com/en/api)
+
+### Features
+It shows the price,price_change_percentage_24h,high_24h,low_24h values rading from coingecko every 20 sec.
+It changes the background color BLUE,RED,GREEN,YELLOW depeneding by the price_change_percentage_24h.
+With the free api you can make max 50 call per minutes.
+
 
 ### What you need?
 - An M5stick arduino device
@@ -10,8 +17,11 @@
     https://www.arduino.cc/en/Main/Software
 - The code into this repo
     coingeko_api_caller.ino
+- Change the value into the code with your own 
 - Compile the code
-  
+
+
+
 ### No experience on arduino? 
 Please follow this video
 
