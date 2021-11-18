@@ -16,7 +16,6 @@ const String real_currency_symbol="$";      //Please sobstitute with the one tha
 
 
 
-
 void setup() {
   M5.begin();
   M5.Lcd.setRotation(3); 
@@ -28,11 +27,11 @@ void setup() {
  
   while (WiFi.status() != WL_CONNECTED) {
     delay(1000);
-    Serial.println("Connecting to WiFi..");
+    //Serial.println("Connecting to WiFi..");
   }
  
-  Serial.println("Connected to the WiFi network");
-  //setClock();
+  //Serial.println("Connected to the WiFi network");
+ 
 }
  
 void loop() {
@@ -42,13 +41,13 @@ void loop() {
     HTTPClient http;
  
     http.begin("https://api.coingecko.com/api/v3/coins/markets?vs_currency="+real_currency_vale+"&ids="+crypto_currency+"&order=market_cap_desc&per_page=100&page=1&sparkline=false"); //Specify the URL
-    int httpCode = http.GET();                                        
+    int httpCode = http.GET();                                        //Make the request
  
     if (httpCode > 0) { //Check for the returning code
       
         String payload = http.getString();
-        Serial.println(httpCode);
-        Serial.println(payload);
+        //Serial.println(httpCode);
+        //Serial.println(payload);
       
         DynamicJsonDocument doc(1024);
         
@@ -56,20 +55,24 @@ void loop() {
         if (error)
           return;
         
-       // double crypto = doc[crypto_currency][real_currency_vale];
+       
         double crypto_value = doc[0]["current_price"];
         double crypto_price_change_percentage_24h = doc[0]["price_change_percentage_24h"];
         int crypto_high_24h = doc[0]["high_24h"];
         int crypto_low_24h = doc[0]["low_24h"];
-        
-        
         String str_crypto_value=String(crypto_value);
-        String str_crypto_price_change_percentage_24h=String(crypto_price_change_percentage_24h);
+        String str_crypto_price_change_percentage_24h="";
+        if (crypto_price_change_percentage_24h > 0) {
+          str_crypto_price_change_percentage_24h="+"+String(crypto_price_change_percentage_24h);
+        } else {
+          str_crypto_price_change_percentage_24h=String(crypto_price_change_percentage_24h);
+        }
+        
         String str_crypto_high_24h=String(crypto_high_24h);
         String str_crypto_low_24h=String(crypto_low_24h);
+       
         
-        
-        //show_display(payload);
+       
         if (crypto_price_change_percentage_24h > 0) {
           M5.Lcd.fillScreen(TFT_GREEN);
         }
@@ -77,10 +80,10 @@ void loop() {
           M5.Lcd.fillScreen(TFT_BLUE);
         }
         if (crypto_price_change_percentage_24h < 0) {
-          M5.Lcd.fillScreen(TFT_RED);
+          M5.Lcd.fillScreen(TFT_YELLOW);
         }
         if (crypto_price_change_percentage_24h < -10) {
-          M5.Lcd.fillScreen(TFT_YELLOW);
+          M5.Lcd.fillScreen(TFT_RED);
         }
        
         M5.Lcd.setCursor(1, 0);
@@ -89,15 +92,16 @@ void loop() {
         M5.Lcd.println(crypto_currency);
         M5.Lcd.setTextSize(3);
         M5.Lcd.println(str_crypto_value+real_currency_symbol);
-        M5.Lcd.setCursor(1, 30);
+        M5.Lcd.setCursor(1, 31);
         M5.Lcd.setTextSize(2);
         M5.Lcd.println();
         
-        M5.Lcd.setCursor(1, 40);
+        M5.Lcd.setCursor(1, 43);
         M5.Lcd.println(str_crypto_low_24h);
         M5.Lcd.println(str_crypto_high_24h);
-        M5.Lcd.setCursor(70, 50);
+        M5.Lcd.setCursor(65, 50);
         M5.Lcd.setTextSize(3);
+        str_crypto_price_change_percentage_24h.remove(5, 1);
         M5.Lcd.println(str_crypto_price_change_percentage_24h);
         
         
