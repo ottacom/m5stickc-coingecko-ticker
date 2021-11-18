@@ -5,9 +5,9 @@
 ### This is a very basic project using FREE coingecko api (https://www.coingecko.com/en/api)
 
 ### Features
-It shows the price,price_change_percentage_24h,high_24h,low_24h values rading from coingecko every 20 sec.
-It changes the background color BLUE,RED,GREEN,YELLOW depeneding by the price_change_percentage_24h.
-You can make max 50 calls per minutes using the free plan api.
+- It shows the price,price_change_percentage_24h,high_24h,low_24h values rading from coingecko every 20 sec.
+- It changes the background color BLUE,RED,GREEN,YELLOW depeneding by the price_change_percentage_24h.
+- You can make max 50 calls per minutes using the free plan api.
 
 
 ### What you need?
