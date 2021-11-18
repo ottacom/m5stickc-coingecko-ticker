@@ -16,4 +16,4 @@
 Please follow the guide into the folder called docs
 
 Enjoy your ticker
-![alt text](https://github.com/ottacom/m5stickc-coingecko-ticker/docs/ticker.jpg)
+![alt text](https://github.com/ottacom/m5stickc-coingecko-ticker/blob/main/docs/ticker.jpg)
