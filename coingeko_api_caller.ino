@@ -26,16 +26,16 @@ void setup() {
   WiFi.begin(ssid, password);
  
   while (WiFi.status() != WL_CONNECTED) {
-    delay(1000);
-    //Serial.println("Connecting to WiFi..");
+    delay(5000);
+    Serial.println("Connecting to WiFi..");
   }
  
-  //Serial.println("Connected to the WiFi network");
+  Serial.println("Connected to the WiFi network");
  
 }
  
 void loop() {
- 
+  
   if ((WiFi.status() == WL_CONNECTED)) { //Check the current connection status
  
     HTTPClient http;
@@ -50,11 +50,16 @@ void loop() {
         //Serial.println(payload);
       
         DynamicJsonDocument doc(1024);
-        
         DeserializationError error = deserializeJson(doc, payload);
-        if (error)
+        if (error) {
+          net_error++;
+          if (net_error > 4) {
+            setup();
+            net_error=0;
+          }
           return;
-        
+        }
+          
        
         double crypto_value = doc[0]["current_price"];
         double crypto_price_change_percentage_24h = doc[0]["price_change_percentage_24h"];
@@ -88,14 +93,12 @@ void loop() {
        
         M5.Lcd.setCursor(1, 0);
         M5.Lcd.setTextSize(2);
-        
         M5.Lcd.println(crypto_currency);
         M5.Lcd.setTextSize(3);
         M5.Lcd.println(str_crypto_value+real_currency_symbol);
         M5.Lcd.setCursor(1, 31);
         M5.Lcd.setTextSize(2);
         M5.Lcd.println();
-        
         M5.Lcd.setCursor(1, 43);
         M5.Lcd.println(str_crypto_low_24h);
         M5.Lcd.println(str_crypto_high_24h);
@@ -112,12 +115,9 @@ void loop() {
     }
  
     http.end(); //Free the resources
+    
   }
  
-  delay(20000);
+  delay(50000);
  
 }
-
-
-
-
