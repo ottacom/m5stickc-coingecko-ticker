@@ -35,9 +35,9 @@ void setup() {
 }
  
 void loop() {
-  
+  int updates=0;
   if ((WiFi.status() == WL_CONNECTED)) { //Check the current connection status
- 
+    
     HTTPClient http;
  
     http.begin("https://api.coingecko.com/api/v3/coins/markets?vs_currency="+real_currency_vale+"&ids="+crypto_currency+"&order=market_cap_desc&per_page=100&page=1&sparkline=false"); //Specify the URL
@@ -60,7 +60,8 @@ void loop() {
           return;
         }
           
-       
+        
+        
         double crypto_value = doc[0]["current_price"];
         double crypto_price_change_percentage_24h = doc[0]["price_change_percentage_24h"];
         int crypto_high_24h = doc[0]["high_24h"];
@@ -117,7 +118,17 @@ void loop() {
     http.end(); //Free the resources
     
   }
- 
-  delay(50000);
+  
+  M5.Lcd.setTextSize(2);
+  M5.Lcd.setCursor(0, 75);
+  while (updates < 100) {
+    // do something repetitive 200 times
+    M5.Lcd.println("..");
+    M5.Lcd.setCursor(updates, 75);
+    updates=updates+2;
+    delay(1000);
+  }
+  
+  
  
 }
