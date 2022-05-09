@@ -7,12 +7,15 @@
 
 
 //WIFI settings
-const char *ssid = "YOUR WIFI SSID"; //YOUR WIFI SSID
-const char *password = "YOURWIFIPASSWORD";  //YOUR WIFI PASSWORD
+const char *ssid = "YOUR_WIFI_SSID";
+const char *password = "YOUR_WIFI_PASSWORD";
 
-const String crypto_currency="wonderland";  //Please sobstitute with the one that you like
-const String real_currency_vale="usd";      //Please sobstitute with the one that you prefer
-const String real_currency_symbol="$";      //Please sobstitute with the one that you prefer
+
+const String crypto_currency="Titano";
+const String crypto_currency_api="titano";
+const String real_currency_vale="usd";
+const String real_currency_symbol="$";
+int net_error=0;
 
 
 
@@ -40,7 +43,7 @@ void loop() {
     
     HTTPClient http;
  
-    http.begin("https://api.coingecko.com/api/v3/coins/markets?vs_currency="+real_currency_vale+"&ids="+crypto_currency+"&order=market_cap_desc&per_page=100&page=1&sparkline=false"); //Specify the URL
+    http.begin("https://api.coingecko.com/api/v3/coins/markets?vs_currency="+real_currency_vale+"&ids="+crypto_currency_api+"&order=market_cap_desc&per_page=100&page=1&sparkline=false"); //Specify the URL
     int httpCode = http.GET();                                        //Make the request
  
     if (httpCode > 0) { //Check for the returning code
